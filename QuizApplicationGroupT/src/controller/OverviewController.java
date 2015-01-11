@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,9 @@ import persistentie.DataHandler;
 import view.BeheerOpdrachten;
 import view.BeheerQuizzen;
 import view.QuizApplicationMain;
+import view.BeheerInstellingen;
+import model.facades.InstellingFacade;
+
 
 public  class OverviewController {
 
@@ -20,13 +24,35 @@ public  class OverviewController {
 		this.theView.addAfsluitenListener(new AfsluitenListener());
 		this.theView.addBeherenVanOpdrachtenListener(new BeherenOpdrachtenListener());
 		this.theView.addBeherenVanQuizzenListener(new BeherenQuizListener());
+		this.theView.addBeheerInstellingen(new BeheerInstellingenListner());
+		theView.setTxtrText(theModel.getDbStrategy().toString());
 		try {
 			this.theModel.vulCatalogi();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			theView.displayErrorMessage(e.toString());
+			theView.displayErrorMessage(e.toString() + " VUl CATALOGI");
+			
 		}
+		}
+	
+
+	class BeheerInstellingenListner implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			theView.dispose();
+			BeheerInstellingen beheerInstelView = new BeheerInstellingen();
+			OpdrachtFacade opdrachtModel = new OpdrachtFacade(theModel.getOpdrachtCatalogus(),theModel.getDbStrategy());
+			@SuppressWarnings("unused")
+			InstellingenController instellingController = new InstellingenController(opdrachtModel,beheerInstelView);
+			beheerInstelView.setVisible(true);
+			
+					
+		}
+		
 	}
+	
 	class BeherenOpdrachtenListener implements ActionListener{
 
 		@Override
@@ -62,6 +88,9 @@ public  class OverviewController {
 			theView.dispose();
 			
 		}
-
+		
+		
 	}
+	
+	
 }

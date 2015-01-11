@@ -77,6 +77,7 @@ public class CsvWriterOpdracht {
 		while((line=br.readLine())!=null){
 			String[] c = line.split(delimiter);
 			Opdracht opdracht = null;
+			UUID id = UUID.fromString(c[1]);
 			String vraag = c[2];
 			String juisteAntwoord =c [3];
 			Integer maxAantalPogingen= Integer.parseInt(c[8]);
@@ -90,17 +91,17 @@ public class CsvWriterOpdracht {
 			switch (c[0]) {
 			case "class model.OpdrachtMeerkeuze":
 				ArrayList<String> keuzes = new ArrayList<String>(Arrays.asList(c[11].split("/")));
-				opdracht = new OpdrachtMeerkeuze(vraag, juisteAntwoord, maxAantalPogingen, 
+				opdracht = new OpdrachtMeerkeuze(id, vraag, juisteAntwoord, maxAantalPogingen, 
 						antwoordHints, maxAntwoordTijd, keuzes, leeraar, opdrachtCategorie);
 				break;
 			case "class model.OpdrachtOpsomming":
 				
 				Boolean inJuisteVolgorde = Boolean.valueOf(c[11]);
-				opdracht = new OpdrachtOpsomming(vraag, juisteAntwoord, maxAantalPogingen,
+				opdracht = new OpdrachtOpsomming(id, vraag, juisteAntwoord, maxAantalPogingen,
 						antwoordHints, maxAntwoordTijd, inJuisteVolgorde, leeraar, opdrachtCategorie);
 				break;
 			case "class model.Opdracht":
-				opdracht = new Opdracht(vraag, juisteAntwoord, maxAantalPogingen, 
+				opdracht = new Opdracht(id, vraag, juisteAntwoord, maxAantalPogingen, 
 						antwoordHints, maxAntwoordTijd, leeraar, opdrachtCategorie);
 				break;
 			default:

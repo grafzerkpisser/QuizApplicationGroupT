@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import enumerations.*;
 
@@ -14,11 +15,11 @@ public class OpdrachtOpsomming extends Opdracht implements Valideerbaar,
 	private Boolean inJuisteVolgorde;
 	public static final String VALIDEERTEKST = "Typ je antwoorden achter elkaar gescheiden door ;";
 
-	public OpdrachtOpsomming(String vraag, String juisteAntwoord,
+	public OpdrachtOpsomming(UUID id, String vraag, String juisteAntwoord,
 			Integer maxAantalPogingen, ArrayList<String> antwoordHints,
 			Integer maxAntwoordTijd, Boolean inJuisteVolgorde, Leraar leraar,
 			OpdrachtCategorie opdrachtCategorie) {
-		super(vraag, juisteAntwoord, maxAantalPogingen, antwoordHints,
+		super(id, vraag, juisteAntwoord, maxAantalPogingen, antwoordHints,
 				maxAntwoordTijd, leraar, opdrachtCategorie);
 		this.inJuisteVolgorde = inJuisteVolgorde;
 	}

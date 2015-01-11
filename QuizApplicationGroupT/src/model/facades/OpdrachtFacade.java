@@ -19,6 +19,8 @@ public class OpdrachtFacade {
 	}
 	
 	
+	
+	
 	//Getters
 	public DbStrategy getDbStrategy(){
 		return this.dbStrategy;
@@ -30,4 +32,6 @@ public class OpdrachtFacade {
 		opdrachtTableModel = new OpdrachtTableModel(opdrachtCatalogus.getOpdrachtenLijst());
 		return opdrachtTableModel;
 	}
+	
+	
 }

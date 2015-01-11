@@ -3,6 +3,7 @@ package model.jUnitModelTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import model.Opdracht;
 import model.OpdrachtCatalogus;
@@ -28,9 +29,9 @@ public class OpdrachtCatalogusTest {
 		b = new OpdrachtCatalogus();
 		ArrayList<String> antwoordhints = new ArrayList<String>();
 		antwoordhints.add("Manneke Pis");
-		o1 = new Opdracht("Hoofdstad van België", "Brussel", 3, antwoordhints,
+		o1 = new Opdracht(UUID.randomUUID(), "Hoofdstad van Belgiï¿½", "Brussel", 3, antwoordhints,
 				30, Leraar.Brecht, OpdrachtCategorie.AlgemeneKennis);
-		q = new Quiz("Hoofdsteden", Leerjaar.eerste, true, false,
+		q = new Quiz(UUID.randomUUID(),"Hoofdsteden", Leerjaar.eerste, true, false,
 				Leraar.Brecht);
 		qo = new QuizOpdracht(q, o1, 5);
 
@@ -71,11 +72,11 @@ public class OpdrachtCatalogusTest {
 		a.voegOpdrachtToe(o1);
 		o1.voegQuizOpdrachtToe(qo);
 		try {
-			a.wijzigVraag(o1, "Wat is de hoofdstad van België");
+			a.wijzigVraag(o1, "Wat is de hoofdstad van Belgiï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("Hoofdstad van België", o1.getVraag());
+		assertEquals("Hoofdstad van Belgiï¿½", o1.getVraag());
 	}
 
 	@Test
@@ -83,11 +84,11 @@ public class OpdrachtCatalogusTest {
 		a.voegOpdrachtToe(o1);
 		o1.voegQuizOpdrachtToe(qo);
 		try {
-			a.wijzigVraag(o1, "Wat is de hoofdstad van België");
+			a.wijzigVraag(o1, "Wat is de hoofdstad van Belgiï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("Hoofdstad van België", o1.getVraag());
+		assertEquals("Hoofdstad van Belgiï¿½", o1.getVraag());
 	}
 
 	@Test
@@ -127,6 +128,6 @@ public class OpdrachtCatalogusTest {
 	@Test
 	public void test_toString_Aanvaard() {
 		a.voegOpdrachtToe(o1);
-		assertEquals(a.toString().compareTo("Hoofdstad van België(Brussel)/n"),0);
+		assertEquals(a.toString().compareTo("Hoofdstad van Belgiï¿½(Brussel)/n"),0);
 	}
 }

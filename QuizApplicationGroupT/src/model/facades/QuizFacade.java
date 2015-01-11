@@ -3,6 +3,7 @@ package model.facades;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import enumerations.Leerjaar;
 import enumerations.Leraar;
@@ -55,8 +56,8 @@ public class QuizFacade {
 		}
 		this.quiz = quizTableModel.getQuizAt(row);
 	}
-	public void setQuiz(String onderwerp, Leerjaar leerjaar, Boolean isTest, Boolean isUniekeDeelname, Leraar leraar){
-		quiz = new Quiz(onderwerp, leerjaar, isTest, isUniekeDeelname, leraar);
+	public void setQuiz(UUID id, String onderwerp, Leerjaar leerjaar, Boolean isTest, Boolean isUniekeDeelname, Leraar leraar){
+		quiz = new Quiz(id, onderwerp, leerjaar, isTest, isUniekeDeelname, leraar);
 	}
 	public void setQuizOnderwerp(String onderwerp) {
 		quiz.setOnderwerp(onderwerp);

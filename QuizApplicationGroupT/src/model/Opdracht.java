@@ -105,10 +105,10 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable, Serializable {
 	}
 
 	//Constructor
-	public Opdracht(String vraag, String juisteAntwoord, Integer maxAantalPogingen, ArrayList<String> antwoordHints,
+	public Opdracht(UUID opdrachtId, String vraag, String juisteAntwoord, Integer maxAantalPogingen, ArrayList<String> antwoordHints,
 			Integer maxAntwoordTijd, Leraar leeraar, OpdrachtCategorie opdrachtCategorie) {
 		this.quizOpdrachten = new ArrayList<QuizOpdracht>();
-		this.opdrachtId = UUID.randomUUID();
+		this.opdrachtId = opdrachtId;
 		this.vraag = vraag;
 		this.juisteAntwoord = juisteAntwoord;
 		this.maxAantalPogingen = maxAantalPogingen;

@@ -17,7 +17,7 @@ import enumerations.QuizStatus;
 public class DataHandler {
 	private DbStrategy dbStrategy;
 	private List<Opdracht> opdrachten = new ArrayList<Opdracht>();
-	private List<Quiz> quizzen =  new ArrayList<Quiz>();
+	private List<Quiz> quizzen = new ArrayList<Quiz>();
 	private List<QuizOpdrachtMapper> quizOpdrachtMappingList;
 	private QuizCatalogus quizCatalogus;
 	private OpdrachtCatalogus opdrachtCatalogus;
@@ -45,27 +45,28 @@ public class DataHandler {
 	public OpdrachtCatalogus getOpdrachtCatalogus() {
 		return opdrachtCatalogus;
 	}
-	public DbStrategy getDbStrategy(){
+
+	public DbStrategy getDbStrategy() {
 		return this.dbStrategy;
 	}
-	public void setDbStrategy(DbStrategy dbStrategy){
+
+	public void setDbStrategy(DbStrategy dbStrategy) {
 		this.dbStrategy = dbStrategy;
 	}
 
-	public void bewaarCatalogi(OpdrachtCatalogus opdrachtCatalogus, QuizCatalogus quizCatalogus,
-			List<QuizOpdracht> quizOpdrachten) throws IOException {
-		for(Opdracht o:opdrachtCatalogus.getOpdrachtenLijst()){
+	public void bewaarCatalogi(OpdrachtCatalogus opdrachtCatalogus, QuizCatalogus quizCatalogus, List<QuizOpdracht> quizOpdrachten)
+			throws IOException {
+		for (Opdracht o : opdrachtCatalogus.getOpdrachtenLijst()) {
 			opdrachten.add(o);
 		}
-		for(Quiz q:quizCatalogus.getQuizLijst()){
+		for (Quiz q : quizCatalogus.getQuizLijst()) {
 			quizzen.add(q);
-//			for(QuizOpdracht qo:q.getQuizOpdrachten())
-//			{
-//				quizOpdrachten.add(qo);
-//			}
+			// for(QuizOpdracht qo:q.getQuizOpdrachten())
+			// {
+			// quizOpdrachten.add(qo);
+			// }
 		}
-		
-		
+
 		dbStrategy.bewaarOpdrachten(opdrachten);
 		dbStrategy.bewaarQuizzen(quizzen);
 		dbStrategy.bewaarQuizOpdrachten(quizOpdrachten);
@@ -83,30 +84,49 @@ public class DataHandler {
 		opdrachtCatalogus = new OpdrachtCatalogus();
 		for (QuizOpdrachtMapper qom : quizOpdrachtMappingList) {
 			Quiz q = null;
-			if (quizCatalogus.getQuizLijst().stream()
-					.filter(o -> o.getQuizId().equals(qom.getQuizId()))
-					.findFirst().isPresent()) {
-				q = quizCatalogus.getQuizLijst().stream()
-						.filter(o -> o.getQuizId().equals(qom.getQuizId()))
+			if (quizCatalogus.getQuizLijst().stream().filter(o -> o.getQuizId().equals(qom.getQuizId())).findFirst().isPresent()) {
+				q = quizCatalogus.getQuizLijst().stream().filter(o -> o.getQuizId().equals(qom.getQuizId()))
 						.collect(singletonCollector());
 				quizCatalogus.verwijderQuiz(q);
 			} else {
-				q = quizzen.stream()
-						.filter(o -> o.getQuizId().equals(qom.getQuizId()))
-						.collect(singletonCollector());
+				q = quizzen.stream().filter(o -> o.getQuizId().equals(qom.getQuizId())).collect(singletonCollector());
 			}
-			Opdracht o = opdrachten.stream()
-					.filter(a -> a.getOpdrachtId().equals(qom.getOpdrachtId()))
+			Opdracht o = opdrachten.stream().filter(a -> a.getOpdrachtId().equals(qom.getOpdrachtId()))
 					.collect(singletonCollector());
-			if(!opdrachtCatalogus.getOpdrachtenLijst().stream()
-					.filter(op -> op.getOpdrachtId().equals(o.getOpdrachtId()))
-					.findFirst().isPresent()){
+			if (!opdrachtCatalogus.getOpdrachtenLijst().stream().filter(op -> op.getOpdrachtId().equals(o.getOpdrachtId()))
+					.findFirst().isPresent()) {
 				opdrachtCatalogus.voegOpdrachtToe(o);
 			}
 
 			QuizStatus quizStatus = q.getQuizStatus();
 			q.setQuizStatus(QuizStatus.IN_CONSTRUCTIE);
-			QuizOpdracht.koppelOpdrachtAanQuiz(q, o, qom.maxScore);
+			// QuizOpdracht.koppelOpdrachtAanQuiz(q, o, qom.maxScore);
+			q.setQuizStatus(quizStatus);
+			quizCatalogus.voegQuizToe(q);
+		}
+
+	}
+
+	public void mapper2() throws Exception {
+		quizCatalogus = new QuizCatalogus();
+		opdrachtCatalogus = new OpdrachtCatalogus();
+
+		for (Quiz q : quizCatalogus.getQuizLijst()) {
+
+			if (quizCatalogus.getQuizLijst().stream().findFirst().isPresent()) {
+				q = quizCatalogus.getQuizLijst().stream().collect(singletonCollector());
+
+			} else {
+				q = quizzen.stream().collect(singletonCollector());
+			}
+			Opdracht o = opdrachten.stream().collect(singletonCollector());
+			if (!opdrachtCatalogus.getOpdrachtenLijst().stream().findFirst().isPresent()) {
+				opdrachtCatalogus.voegOpdrachtToe(o);
+			}
+
+			QuizStatus quizStatus = q.getQuizStatus();
+			q.setQuizStatus(QuizStatus.IN_CONSTRUCTIE);
+			// QuizOpdracht.koppelOpdrachtAanQuiz(q, o, qom.maxScore);
 			q.setQuizStatus(quizStatus);
 			quizCatalogus.voegQuizToe(q);
 		}
@@ -127,8 +147,7 @@ public class DataHandler {
 		private UUID quizId;
 		private Integer maxScore;
 
-		protected QuizOpdrachtMapper(UUID opdrachtId, UUID quizId,
-				Integer maxScore) {
+		protected QuizOpdrachtMapper(UUID opdrachtId, UUID quizId, Integer maxScore) {
 			this.opdrachtId = opdrachtId;
 			this.quizId = quizId;
 			this.maxScore = maxScore;

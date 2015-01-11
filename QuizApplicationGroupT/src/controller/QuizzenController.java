@@ -127,6 +127,7 @@ public class QuizzenController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			/*
 			theModel.setQuiz(theView.getOnderwerp(),
 					theView.getLeerjaar(),theView.getIsTest(), theView.getIsUniekeDeelname(), theView.getLeraar());
 			try {
@@ -148,6 +149,7 @@ public class QuizzenController {
 				// TODO Auto-generated catch block
 				theView.displayErrorMessage(e1.toString());
 			}
+			*/
 		}
 		
 	}

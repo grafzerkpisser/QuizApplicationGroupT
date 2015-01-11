@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import model.OpdrachtMeerkeuze;
 import model.Opdracht;
@@ -44,19 +45,19 @@ public class PersistentieTest {
 		keuzes.add("Brussel");
 		keuzes.add("Antwerpen");
 		keuzes.add("Gent");
-		Opdracht o1 = new Opdracht("Wat is de Hoofdstad van Belgie", "Brussel", 1,
+		Opdracht o1 = new Opdracht(UUID.randomUUID(),"Wat is de Hoofdstad van Belgie", "Brussel", 1,
 				antwoordHints, 60, Leraar.Bart,
 				OpdrachtCategorie.AlgemeneKennis);
-		Opdracht o2 = new OpdrachtMeerkeuze("Hoofdstad van Belgie", "Brussel", 1,
+		Opdracht o2 = new OpdrachtMeerkeuze(UUID.randomUUID(), "Hoofdstad van Belgie", "Brussel", 1,
 				antwoordHints, 60, keuzes, Leraar.Bart,
 				OpdrachtCategorie.AlgemeneKennis);
 		opdrachtCatalogus.voegOpdrachtToe(o1);
 		opdrachtCatalogus.voegOpdrachtToe(o2);
 
 		quizCatalogus = new QuizCatalogus();
-		Quiz q1 = new Quiz("Hoofdsteden", Leerjaar.derde, false, false,
+		Quiz q1 = new Quiz(UUID.randomUUID(), "Hoofdsteden", Leerjaar.derde, false, false,
 				Leraar.Bart);
-		Quiz q2 = new Quiz("Hoofdsteden2", Leerjaar.eerste, false, false,
+		Quiz q2 = new Quiz(UUID.randomUUID(), "Hoofdsteden2", Leerjaar.eerste, false, false,
 				Leraar.Brecht);
 		QuizOpdracht.koppelOpdrachtAanQuiz(q1, o1, 5);
 		QuizOpdracht.koppelOpdrachtAanQuiz(q2, o1, 2);

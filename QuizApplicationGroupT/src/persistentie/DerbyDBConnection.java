@@ -15,7 +15,7 @@ public class DerbyDBConnection {
 
 	// private constructor
 
-	private DerbyDBConnection() {
+	public DerbyDBConnection() {
 		try {
 			Class.forName(driverClass);
 		} catch (ClassNotFoundException e) {
@@ -23,7 +23,7 @@ public class DerbyDBConnection {
 		}
 	}
 
-	private Connection createConnection() {
+	private static Connection createConnection() {
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(DB_URL);

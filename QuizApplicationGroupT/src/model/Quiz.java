@@ -27,10 +27,10 @@ public class Quiz implements Comparable<Quiz>, Cloneable, Serializable {
 	private model.quizStates.QuizState quizState;
 
 	// constructor met parameters
-	public Quiz(String onderwerp, Leerjaar leerjaar, Boolean isTest,
+	public Quiz(UUID quizId, String onderwerp, Leerjaar leerjaar, Boolean isTest,
 			Boolean isUniekeDeelname, Leraar leraar) {
 		quizOpdrachten = new ArrayList<QuizOpdracht>();
-		this.quizId = UUID.randomUUID();
+		this.quizId = quizId;
 		this.onderwerp = onderwerp;
 		this.leerjaar = leerjaar;
 		this.isTest = isTest;

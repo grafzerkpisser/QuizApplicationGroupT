@@ -41,5 +41,8 @@ public class CsvFileHandler implements DbStrategy {
 			throws IOException {
 		CsvWriterQuizOpdracht.bewaar(quizOpdrachten);
 	}
-
+	@Override
+	public String toString(){
+		return "File Handler";
+	}
 }

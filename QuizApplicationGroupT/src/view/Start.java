@@ -4,6 +4,7 @@ import controller.OverviewController;
 import persistentie.CsvFileHandler;
 import persistentie.DataHandler;
 import persistentie.DbStrategy;
+import persistentie.DerbyDatabaseHandler;
 
 public class Start {
 

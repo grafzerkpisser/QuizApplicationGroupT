@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import enumerations.Leraar;
 import enumerations.OpdrachtCategorie;
@@ -17,10 +18,10 @@ public class OpdrachtMeerkeuze extends Opdracht implements Serializable, Validee
 		return keuzes;
 	}
 	public static final String VALIDEERTEKST = "Geen geldige keuze";
-	public OpdrachtMeerkeuze(String vraag, String juisteAntwoord, Integer maxAantalPogingen, ArrayList<String> antwoordHints,
+	public OpdrachtMeerkeuze(UUID id, String vraag, String juisteAntwoord, Integer maxAantalPogingen, ArrayList<String> antwoordHints,
 			Integer maxAntwoordTijd, ArrayList<String> keuzes, 
 			Leraar leeraar, OpdrachtCategorie opdrachtCategorie) {
-		super(vraag, juisteAntwoord, maxAantalPogingen, antwoordHints, maxAntwoordTijd, 
+		super(id, vraag, juisteAntwoord, maxAantalPogingen, antwoordHints, maxAntwoordTijd, 
 				leeraar,opdrachtCategorie);
 		this.keuzes = keuzes;
 	}

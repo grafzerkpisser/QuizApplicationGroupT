@@ -26,6 +26,7 @@ import enumerations.Leraar;
 import enumerations.QuizStatus;
 
 import java.awt.CardLayout;
+import java.util.UUID;
 
 import javax.swing.JToggleButton;
 
@@ -267,7 +268,8 @@ public class BeheerQuizzen extends JFrame {
 	public Integer getSelectedRowFromTable() {
 		return tblQuizzen.getSelectedRow();
 	}
-
+	
+	
 	public Integer getSelectedRowFromOpdrachtTable() {
 		return tblOpdrachtenLijst.getSelectedRow();
 	}

@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 public class QuizApplicationMain extends JFrame {
 
@@ -30,6 +31,15 @@ public class QuizApplicationMain extends JFrame {
 	private JButton btnQuizLijsten;
 	private JButton btnInstellingen;
 	private JButton btnAfsluiten;
+	private JTextArea txtrText;
+
+	public JTextArea getTxtrText() {
+		return txtrText;
+	}
+
+	public void setTxtrText(String txtrText) {
+		this.txtrText.setText(txtrText);
+	}
 
 	/**
 	 * Create the frame.
@@ -88,10 +98,15 @@ public class QuizApplicationMain extends JFrame {
 		btnAfsluiten.setBounds(10, 303, 391, 38);
 		panelMain.add(btnAfsluiten);
 
-		JLabel lblNewLabel = new JLabel(
+		JLabel strategy_label = new JLabel(
 				"<html>Quiz applicatie (V1.0) <br><br>Gemaakt door:<br><br>\r\n      - Bart Blondeel<br>\r\n\t- Gavin Bogaerts<br>\r\n\t- Eli van Duffel<br>\r\n\t- Brecht Richard</html>");
-		lblNewLabel.setBounds(10, 60, 384, 234);
-		panelMain.add(lblNewLabel);
+		strategy_label.setBounds(10, 60, 384, 234);
+		panelMain.add(strategy_label);
+		
+		txtrText = new JTextArea();
+		txtrText.setText("Text");
+		txtrText.setBounds(25, 268, 94, 15);
+		panelMain.add(txtrText);
 	}
 
 	public void displayErrorMessage(String message) {
@@ -109,4 +124,7 @@ public class QuizApplicationMain extends JFrame {
 		btnBeherenOpdrachten.addActionListener(actionListener);
 	}
 	
+	public void addBeheerInstellingen(ActionListener listenForBeheerInstellingen){
+		btnInstellingen.addActionListener(listenForBeheerInstellingen);
+	}
 }

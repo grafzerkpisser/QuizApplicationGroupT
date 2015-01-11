@@ -7,10 +7,12 @@ import java.awt.event.ItemListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.TableColumn;
 
 import persistentie.DataHandler;
 import view.BeheerOpdrachten;
 import view.QuizApplicationMain;
+import model.Opdracht;
 import model.facades.OpdrachtFacade;
 import model.tableModels.OpdrachtTableModel;
 
@@ -22,7 +24,6 @@ public class OpdrachtenController {
 	public OpdrachtenController(OpdrachtFacade theModel, BeheerOpdrachten theView){
 		this.theView = theView;
 		this.theModel = theModel;
-		
 		this.theView.addTerugToMainMenuActionListener(new TerugListener());
 		this.theView.addToevoegenOpdrachtActionListener(new ToevoegenListener());
 		this.theView.addTerugNaarOverviewActionListener(new TerugNaarOverviewListener());
@@ -30,9 +31,13 @@ public class OpdrachtenController {
 		this.theView.addRadioButtonMeerkeuzeItemListener(new OpdrachtTypeMeerkeuzeListener());
 		this.theView.addRadioButtonOpsommingItemListener(new OpdrachtTypeOpsommingListener());
 		this.theView.addRadioButtonOpdrachtItemListener(new OpdrachtTypeDefaultListener());
+		this.theView.addBewaarOpdrachtActionListener(new OpdrachtBewaarListener());
 		OpdrachtTableModel opdrachtTableModel = theModel.getOpdrachtTableModel();
 		theView.setOpdrachtTableModel(opdrachtTableModel);
+		
 	}
+	
+	
 	
 	class TerugListener implements ActionListener{
 
@@ -57,6 +62,14 @@ public class OpdrachtenController {
 		}
 		
 	}
+	class OpdrachtBewaarListener implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e){
+			
+			
+		}
+	}
+	
 	class TerugNaarOverviewListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -70,7 +83,11 @@ public class OpdrachtenController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			theView.activeerDetailPanel();
-			
+			Opdracht a = theModel.getOpdrachtTableModel().getOpdrachtAt(theView.tblOpdrachtOverview.getSelectedRow());
+			theView.setVraag(a.getVraag());
+			theView.setAntwoord(a.getJuisteAntwoord());
+			theView.setMaxTijd(a.getMaxAntwoordTijd());		
+			theView.setLeraar(a.getLeeraar());
 		}
 		
 	}

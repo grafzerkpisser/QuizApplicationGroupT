@@ -28,7 +28,8 @@ public class DerbyDatabaseHandlerTest {
 
 			while (resultSet.next()) {
 				for (int i = 1; i <= aantalKolommen; i++) {
-					System.out.printf("%-8s\t", resultSet.getObject(i));
+					
+					System.out.printf("%s\t", resultSet.getObject(i));
 				}
 				System.out.println();
 			}

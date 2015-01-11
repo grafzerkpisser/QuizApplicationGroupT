@@ -1,6 +1,7 @@
 package persistentie;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import persistentie.DataHandler.QuizOpdrachtMapper;
@@ -10,7 +11,7 @@ import model.Quiz;
 
 public interface DbStrategy {
 	List<Opdracht> leesOpdrachten() throws NumberFormatException, IllegalArgumentException, IOException;
-	List<Quiz> leesQuizzen() throws IOException;
+	List<Quiz> leesQuizzen() throws IOException, SQLException;
 	List<QuizOpdrachtMapper> leesQuizOpdrachten() throws IOException;
 	void bewaarOpdrachten(List<Opdracht>opdrachten) throws IOException;
 	void bewaarQuizzen(List<Quiz>quizzen) throws IOException;

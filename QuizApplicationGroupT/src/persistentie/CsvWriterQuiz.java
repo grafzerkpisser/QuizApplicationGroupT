@@ -53,7 +53,7 @@ public class CsvWriterQuiz {
 			Leerjaar leerjaar =  Leerjaar.valueOf(q[4]);
 			QuizStatus quizStatus = QuizStatus.valueOf(q[5]);
 			Leraar leraar = Leraar.valueOf(q[6]);
-			Quiz quiz = new Quiz(onderwerp, leerjaar, isTest, isUniekeDeelname, leraar);
+			Quiz quiz = new Quiz(quizId, onderwerp, leerjaar, isTest, isUniekeDeelname, leraar);
 			quiz.setQuizId(quizId);
 			quiz.setQuizStatus(quizStatus);
 			quizzenLijst.add(quiz);
