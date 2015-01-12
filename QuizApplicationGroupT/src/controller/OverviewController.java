@@ -47,8 +47,7 @@ public  class OverviewController {
 			@SuppressWarnings("unused")
 			InstellingenController instellingController = new InstellingenController(opdrachtModel,beheerInstelView);
 			beheerInstelView.setVisible(true);
-			
-					
+								
 		}
 		
 	}
